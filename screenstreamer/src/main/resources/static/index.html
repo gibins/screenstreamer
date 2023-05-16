@@ -1,0 +1,35 @@
+<DOCTYPE html>
+<html>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+
+$(document).ready(function(){
+$("button").click(function(){
+	console.log("Event fired");
+	worker();
+	}); });
+
+function worker(){
+	$.post("http://192.168.1.7:8080/str/t",{"Access-Control-Allow-Origin": "*"}, function(data, status){
+	    //alert("Data: " + data + "\nStatus: " + status);
+	    var imagedata = "data:image/jpeg;base64,"+data;
+	    document.getElementById("screen1").src = imagedata; 
+	    setTimeout(worker, 2000);
+	  });
+}
+</script>
+
+
+</head>
+<body>
+<H1>Successfull</H1>
+<button>Send an HTTP GET request to a page and get the result back</button>
+<br>
+<img id ="screen1" src=”base64string”> 
+
+
+</body>
+</html>
+
